@@ -1,0 +1,63 @@
+﻿@model AuthenticationSystem.Models.Item
+
+@{
+    ViewData["Title"] = Model.Nome;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <!-- Caminho de Navegação -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Início</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Nome</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Imagem do Produto -->
+        <div class="col-md-6">
+            <div class="card">
+                <img src="@Model.LinkImg" class="card-img-top" alt="Foto do produto">
+            </div>
+            <div class="d-flex justify-content-start mt-3">
+                <!-- Miniaturas -->
+                <img src="@Model.LinkImg" class="img-thumbnail me-2" style="width: 70px; height: 70px;" alt="Foto do produto">
+                <img src="@Model.LinkImg" class="img-thumbnail me-2" style="width: 70px; height: 70px;" alt="Foto do produto">
+                <img src="@Model.LinkImg" class="img-thumbnail" style="width: 70px; height: 70px;" alt="Foto do produto">
+            </div>
+        </div>
+
+        <!-- Detalhes do Produto -->
+        <div class="col-md-6">
+            <h1 class="display-6 fw-bold">@Model.Nome</h1>
+            <p class="text-muted">SKU: @Model.Id</p>
+            <p><span class="text-decoration-line-through text-muted">R$ @String.Format("{0:F2}", (Model.Preco))</span></p>
+            <h2 class="text-primary">R$ @String.Format("{0:F2}", (Model.Preco - (Model.Preco * 10/100)))</h2>
+            <p><small>5% OFF no PIX ou Boleto</small></p>
+            <p>Em até 6x de <strong>R$ @String.Format("{0:F2}", (Model.Preco / 6))</strong> sem juros no cartão.</p>
+
+            <!-- Botão Comprar -->
+            <div class="d-grid gap-2 mt-4">
+                <button class="btn btn-primary btn-lg">Comprar</button>
+            </div>
+
+            <!-- Calculador de Frete -->
+            <div class="mt-4">
+                <label for="cep" class="form-label">Calcular Frete</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="cep" placeholder="Digite o CEP">
+                    <button class="btn btn-outline-secondary" type="button">Calcular</button>
+                </div>
+            </div>
+
+            <!-- Descrição -->
+            <div class="mt-5">
+                <h4>Descrição</h4>
+                <p>@Model.Descricao</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
